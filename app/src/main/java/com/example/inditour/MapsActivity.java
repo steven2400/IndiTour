@@ -39,18 +39,12 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private EditText searchBar;
-    private static final int AUTOCOMPLETE_REQUEST_CODE = 1;
+    private String apiKey = "AIzaSyD0NZoADtZhfi0YL1_fizo7PJIFo-NL8MY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        // Initialize Places API
-        if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "AIzaSyD0NZoADtZhfi0YL1_fizo7PJIFo-NL8MY");
-        }
 
         // Initialize Google Map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -59,17 +53,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mapFragment.getMapAsync(this);
         }
 
-        // Initialize Search Bar (Clickable)
-        searchBar = findViewById(R.id.search_bar);
-        searchBar.setOnClickListener(v -> openAutocomplete());
         // Logout Icon
         ImageButton logoutIcon = findViewById(R.id.logoutIcon);
-
         logoutIcon.setOnClickListener(v -> {
-            // Firebase Logout
             FirebaseAuth.getInstance().signOut();
-
-            // Redirect to LoginActivity
             Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -81,57 +68,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Default Location - Mandalay, Myanmar
-        LatLng mandalay = new LatLng(21.9162, 96.0866);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mandalay, 12)); // Adjust zoom level
-    }
+        // Get data from intent
+        double lat = getIntent().getDoubleExtra("lat", 0);
+        double lng = getIntent().getDoubleExtra("lng", 0);
+        String placeName = getIntent().getStringExtra("place_name");
 
-    private void openAutocomplete() {
-        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
+        if (lat != 0 && lng != 0) {
+            LatLng selectedPlace = new LatLng(lat, lng);
+            mMap.addMarker(new MarkerOptions().position(selectedPlace).title(placeName));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedPlace, 14));
 
-        try {
-            Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
-                    .build(this);
-            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
-        } catch (Exception e) {
-            Log.e("AutoCompleteError", "Error launching autocomplete: " + e.getMessage());
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
-            if (resultCode == RESULT_OK && data != null) {
-                Place place = Autocomplete.getPlaceFromIntent(data);
-                LatLng latLng = place.getLatLng();
-
-                if (latLng != null) {
-                    searchBar.setText(place.getName()); // Update search bar text
-                    mMap.clear();
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(place.getName()));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
-
-                    // Fetch nearby hotels when a place is selected
-                    fetchNearbyHotels(latLng);
-                }
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                Status status = Autocomplete.getStatusFromIntent(data);
-                Log.e("MapsActivity", "Autocomplete Error: " + status.getStatusMessage());
-            }
+            // ✅ Fetch hotels near the selected location
+            fetchNearbyHotels(selectedPlace);
+        } else {
+            // Default Location - Mandalay
+            LatLng mandalay = new LatLng(21.9162, 96.0866);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mandalay, 12));
+            fetchNearbyHotels(mandalay);
         }
     }
 
     private void fetchNearbyHotels(LatLng location) {
-        String apiKey = "AIzaSyD0NZoADtZhfi0YL1_fizo7PJIFo-NL8MY";
         String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" +
                 "?location=" + location.latitude + "," + location.longitude +
-                "&radius=2000" +  // 2km radius
-                "&type=lodging" +  // Hotels
+                "&radius=2000" +        // search radius in meters (2km)
+                "&type=lodging" +       // hotels/lodging
                 "&key=" + apiKey;
 
-        // Make API Request
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
@@ -145,11 +108,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             double lng = locationObj.getDouble("lng");
                             String name = hotel.getString("name");
 
-                            // Check rating
+                            // check if rating exists
                             double rating = hotel.has("rating") ? hotel.getDouble("rating") : 0;
-                            if (rating >= 3.0) {  // Filter hotels with 3+ stars
+
+                            // ✅ only show hotels with rating >= 3
+                            if (rating >= 3.0) {
                                 LatLng hotelLocation = new LatLng(lat, lng);
-                                mMap.addMarker(new MarkerOptions().position(hotelLocation).title(name + " ★" + rating));
+                                mMap.addMarker(new MarkerOptions()
+                                        .position(hotelLocation)
+                                        .title(name + " ★" + rating));
                             }
                         }
                     } catch (JSONException e) {

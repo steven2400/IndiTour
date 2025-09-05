@@ -21,18 +21,6 @@
 
     <!-- Custom Search Bar -->
 
-    <!-- Logout Button -->
-    <EditText
-        android:id="@+id/search_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:background="@drawable/rounded_bg"
-        android:clickable="true"
-        android:focusable="false"
-        android:hint="Search for a place"
-        android:padding="12dp"
-        android:textSize="16sp" />
 
     <ImageButton
         android:id="@+id/logoutIcon"
