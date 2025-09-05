@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            goToMaps();
+                            goToMain();
                         } else {
                             Toast.makeText(LoginActivity.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                            goToMaps();
+                            goToMain();
                         } else {
                             Toast.makeText(LoginActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -182,15 +182,15 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         Toast.makeText(LoginActivity.this, "Welcome " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
-                        goToMaps();
+                        goToMain();
                     } else {
                         Toast.makeText(LoginActivity.this, "Google sign-in failed.", Toast.LENGTH_LONG).show();
                     }
                 });
     }
 
-    private void goToMaps() {
-        startActivity(new Intent(LoginActivity.this, MapsActivity.class));
+    private void goToMain() {
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
         finish();
     }
 }
