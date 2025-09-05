@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">IndiTour</string>
+    <string name="introTitle">Experience <font color="#3f95ec">India\n</font>Like Never Before</string>
+    <string name="subIntro">Discover India\'s beauty effortlessly with us\nYour smart travel companion!</string>
 </resources>
