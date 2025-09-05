@@ -12,22 +12,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <fragment android:id="@+id/autocomplete_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <!-- Places Autocomplete Fragment -->
+    <fragment
+        android:id="@+id/autocomplete_fragment"
         android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <!-- Custom Search Bar (Now Clickable) -->
+    <!-- Custom Search Bar -->
+
+    <!-- Logout Button -->
     <EditText
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:background="@drawable/rounded_bg"
-        android:padding="12dp"
-        android:hint="Search for a place"
-        android:textSize="16sp"
+        android:clickable="true"
         android:focusable="false"
-        android:clickable="true"/>
+        android:hint="Search for a place"
+        android:padding="12dp"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/logoutIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/rounded_bg_red"
+        android:contentDescription="Logout"
+        android:padding="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_logout"
+        app:tint="@android:color/white" />
+
 </RelativeLayout>

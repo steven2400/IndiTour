@@ -3,7 +3,9 @@ package com.example.inditour;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +27,7 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +62,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Initialize Search Bar (Clickable)
         searchBar = findViewById(R.id.search_bar);
         searchBar.setOnClickListener(v -> openAutocomplete());
+        // Logout Icon
+        ImageButton logoutIcon = findViewById(R.id.logoutIcon);
+
+        logoutIcon.setOnClickListener(v -> {
+            // Firebase Logout
+            FirebaseAuth.getInstance().signOut();
+
+            // Redirect to LoginActivity
+            Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
     }
 
     @Override

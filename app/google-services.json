@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "170753499089-ndqahhdulo935tsqe7fb8likhk7bn307.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.inditour",
+            "certificate_hash": "1493dd2ed73d7cbb4399e7cfdaefb91b69d9ac2f"
+          }
+        },
+        {
           "client_id": "170753499089-nredobvbjcki51odga9aqssh6mqe294u.apps.googleusercontent.com",
           "client_type": 3
         }

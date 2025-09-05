@@ -16,7 +16,7 @@
             android:id="@+id/appTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My App"
+            android:text="INDI TOUR"
             android:textSize="32sp"
             android:textColor="#4A148C"
             android:textStyle="bold"
@@ -61,6 +61,15 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="4dp"/>
 
+        <CheckBox
+            android:id="@+id/rememberMeCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remember me"
+            android:checked="true"
+            android:layout_marginTop="8dp"
+            android:textColor="#555555"/>
+
         <!-- Action Button -->
         <Button
             android:id="@+id/actionButton"
@@ -72,8 +81,17 @@
             android:stateListAnimator="@null"
             android:elevation="4dp"
             android:background="@drawable/button_bg"/>
+        <!-- Remember Me -->
+
+
 
         <!-- Toggle Text (Login/Register) -->
+        <Button
+            android:id="@+id/googleSignInButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in with Google" />
+
         <TextView
             android:id="@+id/toggleTextView"
             android:layout_width="wrap_content"
