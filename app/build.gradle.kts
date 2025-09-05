@@ -40,11 +40,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation(libs.play.services.maps) // Updated
-    implementation(libs.play.services.location) // Updated
-    implementation(libs.places)
-    implementation(libs.maps)
-    implementation(libs.location)
-    implementation(libs.places)
 
 }
