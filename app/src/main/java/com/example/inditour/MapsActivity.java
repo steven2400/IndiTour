@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,7 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
@@ -34,17 +36,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
+import com.google.firebase.functions.FirebaseFunctionsException;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private String apiKey = "AIzaSyD0NZoADtZhfi0YL1_fizo7PJIFo-NL8MY";
+    private FirebaseFunctions functions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        FirebaseApp.initializeApp(this);
 
         // Initialize Google Map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -52,6 +59,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+        String placeName = getIntent().getStringExtra("place_name");
+        double lat = getIntent().getDoubleExtra("lat", 0);
+        double lng = getIntent().getDoubleExtra("lng", 0);
+
+        // Existing: load hotels near lat/lng
+        fetchNearbyHotels(new LatLng(lat, lng));
+        functions = FirebaseFunctions.getInstance();
+
+        TextView itineraryText = findViewById(R.id.itineraryText);
+
+        if (placeName != null && !placeName.isEmpty()) {
+            generateItinerary(placeName, 3, "culture, food, sightseeing", itineraryText);
+        }
+
 
         // Logout Icon
         ImageButton logoutIcon = findViewById(R.id.logoutIcon);
@@ -62,6 +84,51 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startActivity(intent);
             finish();
         });
+    }
+
+    private void generateItinerary(String destination, int days, String interests, TextView itineraryText) {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("destination", destination);
+        data.put("days", days);
+        data.put("interests", interests);
+
+        functions
+                .getHttpsCallable("generateItinerary")
+                .call(data)
+                .addOnSuccessListener(result -> {
+                    Object dataObj = result.getData();
+                    if (dataObj instanceof HashMap) {
+                        HashMap<String, Object> map = (HashMap<String, Object>) dataObj;
+                        Object itineraryObj = map.get("itinerary");
+                        if (itineraryObj != null) {
+                            itineraryText.setText(itineraryObj.toString());
+                        } else {
+                            itineraryText.setText("No itinerary in response.");
+                        }
+                    } else {
+                        itineraryText.setText("Invalid response format.");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    if (e instanceof FirebaseFunctionsException) {
+                        FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
+                        FirebaseFunctionsException.Code code = ffe.getCode();
+
+                        switch (code) {
+                            case RESOURCE_EXHAUSTED:
+                                itineraryText.setText("Cannot generate itinerary: API quota exceeded. Please check your OpenAI plan.");
+                                break;
+                            case INTERNAL:
+                                itineraryText.setText("Failed to generate itinerary due to server error.");
+                                break;
+                            default:
+                                itineraryText.setText("Failed to fetch itinerary: " + ffe.getMessage());
+                                break;
+                        }
+                    } else {
+                        itineraryText.setText("Failed to fetch itinerary: " + e.getMessage());
+                    }
+                });
     }
 
     @Override

@@ -1,0 +1,48 @@
+[debug] [2025-09-06T19:48:24.714Z] ----------------------------------------------------------------------
+[debug] [2025-09-06T19:48:24.717Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Steve\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js functions:secrets:set OPENAI_API_KEY
+[debug] [2025-09-06T19:48:24.717Z] CLI Version:   14.15.2
+[debug] [2025-09-06T19:48:24.717Z] Platform:      win32
+[debug] [2025-09-06T19:48:24.718Z] Node Version:  v22.19.0
+[debug] [2025-09-06T19:48:24.718Z] Time:          Sun Sep 07 2025 01:18:24 GMT+0530 (India Standard Time)
+[debug] [2025-09-06T19:48:24.718Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-09-06T19:48:24.959Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-09-06T19:48:24.960Z] > authorizing via signed-in user (mkksteven240@gmail.com)
+[debug] [2025-09-06T19:48:24.962Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:48:24.962Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:48:24.963Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/inditour24/services/secretmanager.googleapis.com [none]
+[debug] [2025-09-06T19:48:24.963Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/inditour24/services/secretmanager.googleapis.com x-goog-quota-user=projects/inditour24
+[debug] [2025-09-06T19:48:33.036Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/inditour24/services/secretmanager.googleapis.com 200
+[debug] [2025-09-06T19:48:33.036Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/inditour24/services/secretmanager.googleapis.com [omitted]
+[debug] [2025-09-06T19:48:33.037Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:48:33.037Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:48:33.037Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/inditour24/services/secretmanager.googleapis.com:enable [none]
+[debug] [2025-09-06T19:48:33.037Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/inditour24/services/secretmanager.googleapis.com:enable x-goog-quota-user=projects/inditour24
+[debug] [2025-09-06T19:48:33.973Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/inditour24/services/secretmanager.googleapis.com:enable 200
+[debug] [2025-09-06T19:48:33.974Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/inditour24/services/secretmanager.googleapis.com:enable [omitted]
+[debug] [2025-09-06T19:48:43.998Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-09-06T19:48:43.998Z] > authorizing via signed-in user (mkksteven240@gmail.com)
+[debug] [2025-09-06T19:48:43.999Z] [iam] checking project inditour24 for permissions ["firebase.projects.get","secretmanager.secrets.create","secretmanager.secrets.get","secretmanager.secrets.update","secretmanager.versions.add"]
+[debug] [2025-09-06T19:48:43.999Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:48:43.999Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:48:44.000Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/inditour24:testIamPermissions [none]
+[debug] [2025-09-06T19:48:44.000Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/inditour24:testIamPermissions x-goog-quota-user=projects/inditour24
+[debug] [2025-09-06T19:48:44.000Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/inditour24:testIamPermissions {"permissions":["firebase.projects.get","secretmanager.secrets.create","secretmanager.secrets.get","secretmanager.secrets.update","secretmanager.versions.add"]}
+[debug] [2025-09-06T19:48:51.256Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/inditour24:testIamPermissions 200
+[debug] [2025-09-06T19:48:51.256Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/inditour24:testIamPermissions {"permissions":["firebase.projects.get","secretmanager.secrets.create","secretmanager.secrets.get","secretmanager.secrets.update","secretmanager.versions.add"]}
+[debug] [2025-09-06T19:48:51.260Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:48:51.260Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:48:51.260Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/inditour24 [none]
+[debug] [2025-09-06T19:48:51.913Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/inditour24 200
+[debug] [2025-09-06T19:48:51.914Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/inditour24 {"projectNumber":"170753499089","projectId":"inditour24","lifecycleState":"ACTIVE","name":"IndiTour24","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-09-04T17:45:31.674981Z"}
+[debug] [2025-09-06T19:48:51.916Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:48:51.916Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:48:51.916Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/inditour24/secrets/OPENAI_API_KEY [none]
+[debug] [2025-09-06T19:49:03.068Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/inditour24/secrets/OPENAI_API_KEY 404
+[debug] [2025-09-06T19:49:03.068Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/inditour24/secrets/OPENAI_API_KEY {"error":{"code":404,"message":"Secret [projects/170753499089/secrets/OPENAI_API_KEY] not found.","status":"NOT_FOUND"}}
+[debug] [2025-09-06T19:49:03.069Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:49:03.069Z] Checked if tokens are valid: true, expires at: 1757191201587
+[debug] [2025-09-06T19:49:03.069Z] >>> [apiv2][query] POST https://secretmanager.googleapis.com/v1/projects/inditour24/secrets secretId=OPENAI_API_KEY
+[debug] [2025-09-06T19:49:03.069Z] >>> [apiv2][body] POST https://secretmanager.googleapis.com/v1/projects/inditour24/secrets {"name":"OPENAI_API_KEY","replication":{"automatic":{}},"labels":{"firebase-managed":"functions"}}
+[debug] [2025-09-06T19:49:06.218Z] <<< [apiv2][status] POST https://secretmanager.googleapis.com/v1/projects/inditour24/secrets 200
+[debug] [2025-09-06T19:49:06.219Z] <<< [apiv2][body] POST https://secretmanager.googleapis.com/v1/projects/inditour24/secrets {"name":"projects/170753499089/secrets/OPENAI_API_KEY","replication":{"automatic":{}},"createTime":"2025-09-06T19:49:03.241077Z","labels":{"firebase-managed":"functions"},"etag":"\"163e273f3bd403\""}

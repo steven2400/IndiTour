@@ -15,8 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TravelApp"
-        tools:targetApi="31">
+        android:theme="@style/Theme.TravelApp">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD0NZoADtZhfi0YL1_fizo7PJIFo-NL8MY"/>
@@ -32,7 +31,6 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
-
         <activity android:name=".MapsActivity" />
 
         <activity

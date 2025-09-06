@@ -17,27 +17,42 @@
         android:id="@+id/autocomplete_fragment"
         android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
 
-    <!-- Custom Search Bar -->
-
-
+    <!-- Logout Button -->
     <ImageButton
         android:id="@+id/logoutIcon"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="16dp"
+        android:layout_margin="16dp"
         android:background="@drawable/rounded_bg_red"
         android:contentDescription="Logout"
         android:padding="12dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_logout"
         app:tint="@android:color/white" />
+
+    <!-- ScrollView for Itinerary -->
+    <ScrollView
+        android:id="@+id/itineraryScroll"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:background="#CCFFFFFF"
+        android:padding="12dp"
+        android:fadeScrollbars="false">
+
+        <TextView
+            android:id="@+id/itineraryText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your itinerary will appear here after selecting a city"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="4dp" />
+    </ScrollView>
 
 </RelativeLayout>
