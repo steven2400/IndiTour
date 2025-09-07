@@ -13,3 +13,15 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Ignore local environment files
+.env
+.env.local
+.secret
+*.log
+
+# Firebase debug files
+firebase-debug.log
+
+# Node modules
+node_modules/
+

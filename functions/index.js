@@ -49,7 +49,7 @@ exports.generateItinerary = onCall(
       if (error.response?.data?.error?.code === "insufficient_quota") {
         throw new functions.https.HttpsError(
           "resource-exhausted",
-          "OpenAI API quota exceeded. Please check your plan and billing."
+          "I am sorry , OpenAI API quota exceeded. Please check your plan and billing."
         );
       }
 
