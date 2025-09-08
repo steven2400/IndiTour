@@ -42,6 +42,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +59,8 @@ public class MainActivity extends BaseActivity {
 
     ActivityMainBinding binding;
     private EditText searchBar;
+    private ChipNavigationBar chipNavigationBar;
+    private boolean restoringSelection = false;
 
     private GoogleMap mMap;
     private static final int AUTOCOMPLETE_REQUEST_CODE = 1;
@@ -68,6 +71,16 @@ public class MainActivity extends BaseActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+
+        chipNavigationBar = binding.bottomNavBar;
+        restoringSelection = true;
+        chipNavigationBar.setItemSelected(R.id.explorer, true);
+        restoringSelection = false;
+
+        bottomNavbarListener();
+
 
         initLocation();
         initBanner();
@@ -84,6 +97,39 @@ public class MainActivity extends BaseActivity {
         searchBar.setOnClickListener(v -> openAutocomplete());
 
     }
+
+    private void bottomNavbarListener() {
+        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int menuId) {
+                if (restoringSelection) return;
+
+                if (menuId == R.id.explorer) {
+                    // Handle Home
+                } else if (menuId == R.id.favourites) {
+                    // Handle Explorer
+                } else if (menuId == R.id.cart) {
+                    // Handle Bookmark
+                } else if (menuId == R.id.profile) {
+                    // Open ProfileActivity
+                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Ensure Home is selected after returning from ProfileActivity (Back)
+        if (chipNavigationBar != null) {
+            restoringSelection = true;
+            chipNavigationBar.setItemSelected(R.id.explorer, true);
+            restoringSelection = false;
+        }
+    }
+
 
     private void openAutocomplete() {
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);

@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.IntroActivity">
+    tools:context=".IntroActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -274,6 +274,7 @@
     </ScrollView>
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottomNavBar"
         app:cnb_menuResource="@menu/menu_bottom"
         android:layout_width="match_parent"
         android:layout_height="70dp"

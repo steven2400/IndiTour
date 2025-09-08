@@ -25,6 +25,8 @@
         <activity
             android:name=".DetailActivity"
             android:exported="false" />
+        <activity android:name=".ProfileActivity" />
+
         <activity
             android:name=".BaseActivity"
             android:exported="false" />
