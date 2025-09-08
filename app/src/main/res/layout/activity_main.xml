@@ -274,6 +274,7 @@
     </ScrollView>
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottom_nav_bar"
         app:cnb_menuResource="@menu/menu_bottom"
         android:layout_width="match_parent"
         android:layout_height="70dp"
