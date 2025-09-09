@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "170753499089",
+    "firebase_url": "https://inditour24-default-rtdb.firebaseio.com",
     "project_id": "inditour24",
     "storage_bucket": "inditour24.firebasestorage.app"
   },
