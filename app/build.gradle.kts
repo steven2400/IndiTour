@@ -16,6 +16,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters ; "armeabi-v7a"; "arm64-v8a"; "x86"; "x86_64"
+        }
     }
 
     buildTypes {
@@ -40,6 +43,7 @@ android {
 dependencies {
 
     implementation(libs.appcompat)
+    implementation(platform("com.google.firebase:firebase-bom:34.2.0"))
 
     implementation(libs.material)
     implementation(libs.activity)
@@ -59,6 +63,7 @@ dependencies {
     implementation(libs.maps)
     implementation(libs.location)
     implementation(libs.places)
+    implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth-ktx:23.2.1")
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
@@ -70,6 +75,6 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("org.json:json:20230227")
-    implementation("com.google.firebase:firebase-functions:20.4.0")
+    implementation("com.google.firebase:firebase-functions:22.0.0")
 
 }
